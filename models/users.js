@@ -4,7 +4,7 @@ const orderSchema = mongoose.Schema({
   type: String,
   product: { type: mongoose.Schema.Types.ObjectId, ref: "product" },
   quantity: Number,
-  amount: String,
+  amount: Number,
   current_state: String,
   type_delivery: String,
 });
@@ -33,4 +33,4 @@ const userSchema = mongoose.Schema({
 
 const userModel = mongoose.model("users", userSchema);
 
-module.exports = { userModel };
+module.exports = userModel;

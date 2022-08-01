@@ -11,12 +11,12 @@ const productSchema = mongoose.Schema({
   domain_name: String,
   domain_adress: String,
   dedicated_quantitity: Number,
-  stock_by_unity: String,
-  max_sponsor_stock: String,
+  stock_by_unity: Number,
+  max_sponsor_stock: Number,
   date_semance: Date,
   date_harvest: Date,
 });
 
 const productModel = mongoose.model("products", productSchema);
 
-module.exports = { productModel };
+module.exports = productModel;

@@ -1,9 +1,6 @@
 var express = require("express");
 var router = express.Router();
 
-//Connection to Mongoose
-var mongoose = require("mongoose");
-
 //Uniq ID
 var uniqid = require("uniqid");
 
