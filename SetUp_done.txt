@@ -1,0 +1,49 @@
+BACKEND
+1- Installation express
+2- Installation Mongoose
+    Import dans index.js => var mongoose = require('mongoose');
+                          var options = { connectTimeoutMS: 5000, useNewUrlParser: true, useUnifiedTopology : true} 
+                          mongoose.connect('mongodb+srv://dev:LaCapsule@cluster0.jcdou.mongodb.net/sandbox? retryWrites=true&w=majority',
+                          options, function(err) {
+                          console.log(err); }
+                           ); LIEN DE LA DATABASE A CHANGER
+    Creation dossier models
+3- Installation FileUpload
+        Mis en place dans le framework (app.js line 1) => var fileUpload = require('express-fileupload');
+        Utilisation dans le framework (app.js line 12) => app.use(fileUpload());
+4- Installation uniqid
+        Import dans routes/index.js  =>  var uniqid = require('uniqid');
+5- Installation Cloudinary
+        Import dans routes/index.js => var cloudinary = require('cloudinary').v2;
+                                        cloudinary.config({
+                                        cloud_name: 'cdijakqjo',
+                                        api_key: '767287109552128',
+                                        api_secret: 'BRfbaQzy3xSWMq0NDAqdLASA9nfo'
+                                        });
+
+    FRONTEND
+1- Installation Expo 
+        Import dans App.js =>  import React from 'react';
+        Creation dossier screens et tous les fichiers screens
+2- Installation du composant principal React Navigation
+3- Installation des dépendances react-native nécessaires
+4- Installation Stack Navigation
+        Import des composants et const Stack dans App.js => {NavigationContainer}, {createStackNavigator}
+5- Installation Bottom Tab Navigation
+        Import du composant et const Tab dans App.js => {createBottomTabNavigator}
+6- Installation MapView et Geoloc
+        Import composant dans ResearchScreen => import MapView from 'react-native'
+                                                import {Marker} from 'react-native-maps';
+                                                import * as Location from 'expo-location'; 
+                                                import * as Permissions from 'expo-permissions';
+7- Installation Local Storage
+        DOIT ENCORE IMPORTER => import AsyncStorage from '@react-native-async-storage/async-storage';
+8- Installation Camera
+        Import du composant dans ProfileScreen => import { Camera } from 'expo-camera';
+9- Installation React-Native Elements pour champs de saisie
+10- Installation Redux
+        Création dossier reducers
+        DOIT ENCORE IMPORTER => import {connect} from 'react-redux';
+                                import {Provider} from 'react-redux';
+                                import {createStore, combineReducers} from 'redux';
+                                const store = createStore(combineReducers({nameOfReducers}));
