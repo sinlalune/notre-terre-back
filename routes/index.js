@@ -14,6 +14,46 @@ cloudinary.config({
   api_secret: "CHANGE API SECRET",
 });
 
+/* POST user to database. */
+router.post("/sign-up", async function (req, res, next) {
+  const cost = 10;
+  const hash = bcrypt.hashSync(req.body.passwordFromFront, cost);
+
+  var error = [];
+  var result = false;
+  var saveUser = null;
+  var token = null;
+
+  const data = await userModel.findOne({
+    email: req.body.emailFromFront,
+  });
+
+  if (data != null) {
+    error.push("❌ I think, you are already registred 😎");
+  }
+
+  if (req.body.emailFromFront == "" || req.body.passwordFromFront == "") {
+    error.push("❌ Ooops, i need more informations 😉");
+  }
+
+  if (error.length == 0) {
+    var newUser = new userModel({
+      email: req.body.emailFromFront,
+      password: hash,
+      token: uid2(32),
+    });
+
+    saveUser = await newUser.save();
+
+    if (saveUser) {
+      result = true;
+      token = saveUser.token;
+    }
+  }
+
+  res.json({ result, saveUser, error, token });
+});
+
 /* GET home page. */
 router.get("/product", async function (req, res, next) {
   const product = await productModel.find();
