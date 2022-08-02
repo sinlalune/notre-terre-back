@@ -76,7 +76,7 @@ router.post("/product", async function (req, res, next) {
     type: req.body.type,
     name: req.body.name,
     icon_type: req.body.icon,
-    species: req.body.specie,
+    species_name: req.body.species_name,
     label: req.body.label,
     domain_name: req.body.domain_name,
     domain_adress: req.body.domain_adress,
@@ -86,7 +86,6 @@ router.post("/product", async function (req, res, next) {
     date_semance: req.body.semance,
     date_harvest: req.body.harvest,
   });
-
   const savedProduct = await addProduct.save();
   res.json({ savedProduct });
 });

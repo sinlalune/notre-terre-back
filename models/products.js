@@ -4,7 +4,7 @@ const productSchema = mongoose.Schema({
   type: String,
   name: String,
   icon_type: String,
-  species: String,
+  species_name: String,
   label: String,
   icon_label: String,
   producer: { type: mongoose.Schema.Types.ObjectId, ref: "producers" },
