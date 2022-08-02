@@ -3,6 +3,8 @@ var router = express.Router();
 //Uniq ID
 var uniqid = require("uniqid");
 const productModel = require("../models/products");
+// Import of User Model
+var userModel = require("../models/users");
 const { findById } = require("../models/users");
 
 //Set-Up Cloudinary
@@ -52,6 +54,37 @@ router.post("/sign-up", async function (req, res, next) {
   }
 
   res.json({ result, saveUser, error, token });
+});
+
+// POST existing user
+router.post("/sign-in", async function (req, res, next) {
+  var error = [];
+  var result = false;
+  var searchUser = null;
+  var token = null;
+
+  if (req.body.emailFromFront == "" || req.body.passwordFromFront == "") {
+    error.push("❌ Ooops, i need more informations 😉");
+  }
+
+  if (error.length == 0) {
+    var searchUser = await userModel.findOne({
+      email: req.body.emailFromFront,
+    });
+  }
+
+  if (searchUser) {
+    if (bcrypt.compareSync(req.body.passwordFromFront, searchUser.password)) {
+      result = true;
+    } else {
+      result = false;
+      error.push("❌ Email or password doesn't match ☹️");
+    }
+  } else {
+    error.push("❌ Email or password doesn't match ☹️");
+  }
+
+  res.json({ result, searchUser, token, error });
 });
 
 /* GET home page. */
