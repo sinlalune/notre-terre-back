@@ -5,10 +5,6 @@ var uniqid = require("uniqid");
 const productModel = require("../models/products");
 const { findById } = require("../models/users");
 
-<<<<<<< HEAD
-// Import of User Model
-var userModel = require('../models/users')
-=======
 var bcrypt = require("bcrypt");
 var uid2 = require("uid2");
 
@@ -16,57 +12,11 @@ var uniqid = require("uniqid");
 
 // Import of User Model
 var userModel = require("../models/users");
->>>>>>> 72df2ab30a0ed15a8abd1d2ecf36332450104454
 
 //Set-Up Cloudinary
 var cloudinary = require("cloudinary").v2;
 
 cloudinary.config({
-<<<<<<< HEAD
-  cloud_name: "CHANGE CLOUD NAME",
-  api_key: "CHANGE API KEY",
-  api_secret: "CHANGE API SECRET",
-});
-
-/* POST new user to database. */
-router.post("/sign-up", async function (req, res, next) {
-  const cost = 10;
-  const hash = bcrypt.hashSync(req.body.passwordFromFront, cost);
-
-  var error = [];
-  var result = false;
-  var saveUser = null;
-  var token = null;
-
-  const data = await userModel.findOne({
-    email: req.body.emailFromFront,
-  });
-
-  if (data != null) {
-    error.push("❌ I think, you are already registred 😎");
-  }
-
-  if (req.body.emailFromFront == "" || req.body.passwordFromFront == "") {
-    error.push("❌ Ooops, i need more informations 😉");
-  }
-
-  if (error.length == 0) {
-    var newUser = new userModel({
-      email: req.body.emailFromFront,
-      password: hash,
-      token: uid2(32),
-    });
-
-    saveUser = await newUser.save();
-
-    if (saveUser) {
-      result = true;
-      token = saveUser.token;
-    }
-  }
-
-  res.json({ result, saveUser, error, token });
-=======
 	cloud_name: "CHANGE CLOUD NAME",
 	api_key: "CHANGE API KEY",
 	api_secret: "CHANGE API SECRET",
@@ -151,7 +101,6 @@ router.post("/sign-in", async function (req, res, next) {
 	}
 
 	res.json({ result, searchUser, token, error });
->>>>>>> 72df2ab30a0ed15a8abd1d2ecf36332450104454
 });
 
 
