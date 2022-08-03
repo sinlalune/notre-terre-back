@@ -3,6 +3,7 @@ var router = express.Router();
 //Uniq ID
 var uniqid = require("uniqid");
 const productModel = require("../models/products");
+const producerModel = require("../models/producers");
 // Import of User Model
 var userModel = require("../models/users");
 const { findById } = require("../models/users");
@@ -91,6 +92,15 @@ router.post("/sign-in", async function (req, res, next) {
 router.get("/productlist", async function (req, res, next) {
   const product = await productModel.find();
   res.json({ product });
+});
+
+router.get("/producer", async function (req, res, next) {
+  console.log("req", req.query.producer_id);
+  const producer_id = req.query.producer_id;
+  console.log("id", producer_id);
+  const producer = await producerModel.findById(producer_id.toString());
+  console.log("producer", producer);
+  res.json({ producer });
 });
 
 module.exports = router;
