@@ -88,7 +88,7 @@ router.post("/sign-in", async function (req, res, next) {
 });
 
 /* GET home page. */
-router.get("/product", async function (req, res, next) {
+router.get("/productlist", async function (req, res, next) {
   const product = await productModel.find();
   res.json({ product });
 });

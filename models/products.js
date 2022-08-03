@@ -12,6 +12,7 @@ const productSchema = mongoose.Schema({
   domain_adress: String,
   dedicated_quantitity: Number,
   stock_by_unity: Number,
+  kilo_price: Number,
   max_sponsor_stock: Number,
   date_semance: Date,
   date_harvest: Date,
