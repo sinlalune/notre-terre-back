@@ -94,6 +94,8 @@ router.post("/product", async function (req, res, next) {
 });
 
 router.post("/productadress", async function (req, res, next) {
+  console.log("coord", req.body.lat, req.body.lon);
+
   const addorder = await productModel.updateOne(
     { _id: req.body.id },
     {
