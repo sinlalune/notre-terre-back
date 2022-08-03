@@ -82,10 +82,13 @@ router.post("/product", async function (req, res, next) {
     domain_adress: req.body.domain_adress,
     dedicated_quantitity: req.body.quantity,
     stock_by_unity: req.body.unity,
+    kilo_price: req.body.kilo_price,
     max_sponsor_stock: req.body.max,
     date_semance: req.body.semance,
     date_harvest: req.body.harvest,
+    producer: req.body.producer,
   });
+
   const savedProduct = await addProduct.save();
   res.json({ savedProduct });
 });
