@@ -86,7 +86,9 @@ router.post("/product", async function (req, res, next) {
     max_sponsor_stock: req.body.max,
     date_semance: req.body.semance,
     date_harvest: req.body.harvest,
+    producer: req.body.producer,
   });
+
   const savedProduct = await addProduct.save();
   res.json({ savedProduct });
 });
