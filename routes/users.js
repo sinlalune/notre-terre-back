@@ -5,7 +5,6 @@ var uniqid = require("uniqid");
 const productModel = require("../models/products");
 const { findById } = require("../models/users");
 
-var bcrypt = require("bcrypt");
 var uid2 = require("uid2");
 
 var uniqid = require("uniqid");
