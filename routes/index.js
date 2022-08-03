@@ -1,12 +1,9 @@
 var express = require("express");
 var router = express.Router();
-const productModel = require("../models/products");
 
-
-/* GET home page. */
-router.get("/product", async function (req, res, next) {
-  const product = await productModel.find();
-  res.json({ product });
+/* GET users listing. */
+router.get("/", function (req, res, next) {
+	res.send("respond with a resource");
 });
  // Final 
 module.exports = router;
