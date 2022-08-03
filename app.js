@@ -9,6 +9,7 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var createRouter = require("./routes/create");
 var cardRouter = require("./routes/card");
+var researchRouter = require('./routes/research')
 
 var app = express();
 
