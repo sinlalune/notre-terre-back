@@ -1,5 +1,8 @@
 var mongoose = require("mongoose");
-
+const adressSchema = mongoose.Schema({
+  lat: Number,
+  lon: Number,
+});
 const productSchema = mongoose.Schema({
   type: String,
   name: String,
@@ -9,7 +12,7 @@ const productSchema = mongoose.Schema({
   icon_label: String,
   producer: { type: mongoose.Schema.Types.ObjectId, ref: "producers" },
   domain_name: String,
-  domain_adress: String,
+  domain_adress: adressSchema,
   dedicated_quantitity: Number,
   stock_by_unity: Number,
   kilo_price: Number,
