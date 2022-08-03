@@ -93,4 +93,21 @@ router.post("/product", async function (req, res, next) {
   res.json({ savedProduct });
 });
 
+router.post("/productadress", async function (req, res, next) {
+  const addorder = await productModel.updateOne(
+    { _id: req.body.id },
+    {
+      $push: {
+        domain_adress: {
+          lat: req.body.lat,
+          lon: req.body.lon,
+        },
+      },
+    }
+  );
+  const updatedUser = await productModel.findById(req.body.id);
+
+  res.json({ updatedUser });
+});
+
 module.exports = router;
