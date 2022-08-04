@@ -17,17 +17,19 @@ router.get("/producer", async function (req, res, next) {
   res.json({ producer });
 });
 
-
 router.get("/product", async function (req, res, next) {
-    console.log("req", req.query.producer_id);
-    const producer_id = req.query.product_id;
-    console.log("id", producer_id);
-    const product = await productModel.findById(producer_id.toString());
-    console.log("producer", product);
-    const domain_adress = product.domain_adress
-    res.json({ domain_adress });
-  });
+  console.log("req", req.query.product_id);
+  const product_id = req.query.product_id;
+  console.log("id", product_id);
+  const product = await productModel
+    .findById(product_id)
+    .populate("domain_adress");
+  res.json({ product });
+});
 
+// console.log("producer", product);
+// const domain_adress = product.domain_adress;
+// res.json({ domain_adress });
 
 // Final
 module.exports = router;

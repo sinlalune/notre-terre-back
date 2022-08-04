@@ -12,7 +12,14 @@ const productSchema = mongoose.Schema({
   icon_label: String,
   producer: { type: mongoose.Schema.Types.ObjectId, ref: "producers" },
   domain_name: String,
-  domain_adress: adressSchema,
+  // domain_adress: [
+  //   {
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: "adressSchema",
+  //   }
+  // ],
+  domain_adress: [adressSchema],
+
   dedicated_quantitity: Number,
   stock_by_unity: Number,
   kilo_price: Number,

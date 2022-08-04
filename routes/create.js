@@ -79,6 +79,7 @@ router.post("/product", async function (req, res, next) {
     species_name: req.body.species_name,
     label: req.body.label,
     domain_name: req.body.domain_name,
+    domain_adress: [{ lat: req.body.lat, lon: req.body.lon }],
     dedicated_quantitity: req.body.quantity,
     stock_by_unity: req.body.unity,
     kilo_price: req.body.kilo_price,
