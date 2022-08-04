@@ -5,6 +5,12 @@ var uniqid = require("uniqid");
 const productModel = require("../models/products");
 const { findById } = require("../models/users");
 
+<<<<<<< HEAD
+=======
+// Import of User Model
+var userModel = require("../models/users");
+var bcrypt = require("bcrypt");
+>>>>>>> ff240792b2b64019fc86c3bcc0908637d486c792
 var uid2 = require("uid2");
 
 var uniqid = require("uniqid");
@@ -16,13 +22,20 @@ var userModel = require("../models/users");
 var cloudinary = require("cloudinary").v2;
 
 cloudinary.config({
+<<<<<<< HEAD
   cloud_name: "CHANGE CLOUD NAME",
   api_key: "CHANGE API KEY",
   api_secret: "CHANGE API SECRET",
+=======
+	cloud_name: "CHANGE CLOUD NAME",
+	api_key: "CHANGE API KEY",
+	api_secret: "CHANGE API SECRET",
+>>>>>>> ff240792b2b64019fc86c3bcc0908637d486c792
 });
 
 /* GET users listing. */
 router.get("/", function (req, res, next) {
+<<<<<<< HEAD
   res.send("respond with a resource");
 });
 
@@ -68,6 +81,51 @@ router.post("/sign-up", async function (req, res, next) {
   }
 
   res.json({ result, saveUser, error, token });
+=======
+	res.send("respond with a resource");
+});
+
+/* POST user to database. */
+router.post("/sign-up", async function (req, res, next) {
+	console.log(req.body);
+
+	const cost = 10;
+	const hash = bcrypt.hashSync(req.body.passwordFromFront, cost);
+
+	var error = [];
+	var result = false;
+	var saveUser = null;
+	var token = null;
+
+	const data = await userModel.findOne({
+		email: req.body.emailFromFront,
+	});
+
+	if (data != null) {
+		error.push("❌ I think, you are already registred 😎");
+	}
+
+	if (req.body.emailFromFront == "" || req.body.passwordFromFront == "") {
+		error.push("❌ Ooops, i need more informations 😉");
+	}
+
+	if (error.length == 0) {
+		var newUser = new userModel({
+			email: req.body.emailFromFront,
+			password: hash,
+			token: uid2(32),
+		});
+
+		saveUser = await newUser.save();
+
+		if (saveUser) {
+			result = true;
+			token = saveUser.token;
+		}
+	}
+
+	res.json({ result, saveUser, error, token });
+>>>>>>> ff240792b2b64019fc86c3bcc0908637d486c792
 });
 
 // POST existing user
@@ -99,6 +157,7 @@ router.post("/sign-in", async function (req, res, next) {
     error.push("❌ Email or password doesn't match ☹️");
   }
 
+<<<<<<< HEAD
   res.json({ result, searchUser, token, error });
 });
 
@@ -132,3 +191,9 @@ router.post("/sign-in", async function (req, res, next) {
 
   res.json({ result, searchUser, token, error });
 });
+=======
+	res.json({ result, searchUser, token, error });
+});
+
+module.exports = router;
+>>>>>>> ff240792b2b64019fc86c3bcc0908637d486c792
