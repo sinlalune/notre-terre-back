@@ -1,10 +1,8 @@
 var express = require("express");
 var router = express.Router();
 const productModel = require("../models/products");
-const producerModel = require("../models/producers");
 
 const producerModel = require("../models/producers");
-const productModel = require("../models/products");
 
 router.get("/productlist", async function (req, res, next) {
   const product = await productModel.find();
