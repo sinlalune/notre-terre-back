@@ -45,12 +45,14 @@ router.post("/sign-up", async function (req, res, next) {
 		email: req.body.emailFromFront,
 	});
 
-	if (data != null) {
-		error.push("❌ I think, you are already registred 😎");
+	if (data) {
+		error.push(
+			"❌ Utilisateur déjà enregistré, veuillez saisir une autre adresse email ❌",
+		);
 	}
 
 	if (req.body.emailFromFront == "" || req.body.passwordFromFront == "") {
-		error.push("❌ Ooops, i need more informations 😉");
+		error.push("❌ Ooops, j'ai besoin de plus d'informations ❌");
 	}
 
 	if (error.length == 0) {
@@ -68,7 +70,7 @@ router.post("/sign-up", async function (req, res, next) {
 		}
 	}
 
-	res.json({ result, saveUser, error, token });
+	res.json({ result, searchUser: saveUser, error, token });
 });
 
 // POST existing user
@@ -79,7 +81,7 @@ router.post("/sign-in", async function (req, res, next) {
 	var token = null;
 
 	if (req.body.emailFromFront == "" || req.body.passwordFromFront == "") {
-		error.push("❌ Ooops, i need more informations 😉");
+		error.push("❌ Ooops, j'ai besoin de plus d'informations ❌");
 	}
 
 	if (error.length == 0) {
@@ -94,10 +96,10 @@ router.post("/sign-in", async function (req, res, next) {
 		} else {
 			result = false;
 			searchUser = null;
-			error.push("❌ Email or password doesn't match ☹️");
+			error.push("❌ Email ou mot de passe incorrect ❌");
 		}
 	} else {
-		error.push("❌ Email or password doesn't match ☹️");
+		error.push("❌ Email ou mot de passe incorrect ❌");
 	}
 
 	res.json({ result, searchUser, token, error });
