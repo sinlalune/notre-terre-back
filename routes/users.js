@@ -45,25 +45,15 @@ router.post("/sign-up", async function (req, res, next) {
     email: req.body.emailFromFront,
   });
 
-<<<<<<< HEAD
-  if (data != null) {
-    error.push("❌ I think, you are already registred 😎");
+  if (data) {
+    error.push(
+      "❌ Utilisateur déjà enregistré, veuillez saisir une autre adresse email ❌"
+    );
   }
 
   if (req.body.emailFromFront == "" || req.body.passwordFromFront == "") {
-    error.push("❌ Ooops, i need more informations 😉");
+    error.push("❌ Ooops, j'ai besoin de plus d'informations ❌");
   }
-=======
-	if (data) {
-		error.push(
-			"❌ Utilisateur déjà enregistré, veuillez saisir une autre adresse email ❌",
-		);
-	}
-
-	if (req.body.emailFromFront == "" || req.body.passwordFromFront == "") {
-		error.push("❌ Ooops, j'ai besoin de plus d'informations ❌");
-	}
->>>>>>> ec73002e1c8ab95f6f6e29412448521c9db92564
 
   if (error.length == 0) {
     var newUser = new userModel({
@@ -80,11 +70,7 @@ router.post("/sign-up", async function (req, res, next) {
     }
   }
 
-<<<<<<< HEAD
-  res.json({ result, saveUser, error, token });
-=======
-	res.json({ result, searchUser: saveUser, error, token });
->>>>>>> ec73002e1c8ab95f6f6e29412448521c9db92564
+  res.json({ result, searchUser: saveUser, error, token });
 });
 
 // POST existing user
@@ -94,15 +80,9 @@ router.post("/sign-in", async function (req, res, next) {
   var searchUser = null;
   var token = null;
 
-<<<<<<< HEAD
   if (req.body.emailFromFront == "" || req.body.passwordFromFront == "") {
-    error.push("❌ Ooops, i need more informations 😉");
+    error.push("❌ Ooops, j'ai besoin de plus d'informations ❌");
   }
-=======
-	if (req.body.emailFromFront == "" || req.body.passwordFromFront == "") {
-		error.push("❌ Ooops, j'ai besoin de plus d'informations ❌");
-	}
->>>>>>> ec73002e1c8ab95f6f6e29412448521c9db92564
 
   if (error.length == 0) {
     var searchUser = await userModel.findOne({
@@ -110,31 +90,17 @@ router.post("/sign-in", async function (req, res, next) {
     });
   }
 
-<<<<<<< HEAD
   if (searchUser) {
     if (bcrypt.compareSync(req.body.passwordFromFront, searchUser.password)) {
       result = true;
     } else {
       result = false;
       searchUser = null;
-      error.push("❌ Email or password doesn't match ☹️");
+      error.push("❌ Email ou mot de passe incorrect ❌");
     }
   } else {
-    error.push("❌ Email or password doesn't match ☹️");
+    error.push("❌ Email ou mot de passe incorrect ❌");
   }
-=======
-	if (searchUser) {
-		if (bcrypt.compareSync(req.body.passwordFromFront, searchUser.password)) {
-			result = true;
-		} else {
-			result = false;
-			searchUser = null;
-			error.push("❌ Email ou mot de passe incorrect ❌");
-		}
-	} else {
-		error.push("❌ Email ou mot de passe incorrect ❌");
-	}
->>>>>>> ec73002e1c8ab95f6f6e29412448521c9db92564
 
   res.json({ result, searchUser, token, error });
 });
