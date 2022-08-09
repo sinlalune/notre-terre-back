@@ -23,7 +23,8 @@ router.get("/product", async function (req, res, next) {
   console.log("The id of this product is: ", product_id);
   const product = await productModel
     .findById(product_id)
-    .populate("domain_adress", "producer");
+    .populate("domain_adress")
+    .populate("producer");
   res.json({ product });
 });
 
