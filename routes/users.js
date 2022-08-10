@@ -1,25 +1,20 @@
 var express = require("express");
 var router = express.Router();
-
-//Uniq ID
-var uniqid = require("uniqid");
 const productModel = require("../models/products");
 const { findById } = require("../models/users");
 
-// Import of User Model
 const userModel = require("../models/users");
+
 var bcrypt = require("bcrypt");
 var uid2 = require("uid2");
 
+var fs = require("fs");
 var uniqid = require("uniqid");
-
-//Set-Up Cloudinary
 var cloudinary = require("cloudinary").v2;
-
 cloudinary.config({
-	cloud_name: "CHANGE CLOUD NAME",
-	api_key: "CHANGE API KEY",
-	api_secret: "CHANGE API SECRET",
+	cloud_name: "dsmmqrr4r",
+	api_key: "265735272248935",
+	api_secret: "XR2iggtvixTB5Z3Ht0BcMQpGAJk",
 });
 
 var firstUpperCase = function (text) {
@@ -51,7 +46,7 @@ router.get("/test", function (req, res, next) {
 });
 /* POST user to database. */
 router.post("/sign-up", async function (req, res, next) {
-	console.log(req.body.emailFromFront);
+	console.log(req.body);
 
 	var error = [];
 	var result = false;
@@ -110,15 +105,17 @@ router.post("/sign-up", async function (req, res, next) {
 				zipcode: newUserSave.zipcode,
 				city: newUserSave.city,
 			};
+			res.json({ result, searchUser: newUserSave, error, token });
 		}
-		res.json({ result, searchUser: newUserSave, error, token });
+	} else {
+		res.json({ error });
 	}
-	res.json({ error });
 });
 
 // POST existing user
 router.post("/sign-in", async function (req, res, next) {
 	console.log(req.body);
+
 	var error = [];
 	var result = false;
 	var searchUser = null;
@@ -132,22 +129,54 @@ router.post("/sign-in", async function (req, res, next) {
 		var searchUser = await userModel.findOne({
 			email: req.body.emailFromFront,
 		});
-		console.log(searchUser);
-	}
 
-	if (searchUser) {
-		if (bcrypt.compareSync(req.body.passwordFromFront, searchUser.password)) {
-			result = true;
-			token = searchUser.token;
+		if (searchUser) {
+			if (bcrypt.compareSync(req.body.passwordFromFront, searchUser.password)) {
+				result = true;
+				token = searchUser.token;
+			} else {
+				result = false;
+				error.push("❌ Email ou mot de passe incorrect ❌");
+			}
 		} else {
-			result = false;
 			error.push("❌ Email ou mot de passe incorrect ❌");
 		}
-	} else {
-		error.push("❌ Email ou mot de passe incorrect ❌");
-	}
 
-	res.json({ result, searchUser, error, token });
+		res.json({ result, searchUser, error, token });
+	}
+});
+
+router.post("/upload-snap", async function (req, res, next) {
+	console.log("uploadsnap");
+	console.log(req.files.photoTaken);
+	console.log(req.files);
+	console.log(req.files.photoTaken.name); // nom d'origine de l'image
+	console.log(req.files.photoTaken.mimetype); // format de fichier
+	console.log(req.files.photoTaken.data); // données brutes du fichier
+
+	const pictureName = "./tmp/" + uniqid() + ".jpg";
+	var resultCopy = await req.files.photoTaken.mv(pictureName);
+
+	console.log("This is a picture to tmp :", resultCopy);
+
+	if (!resultCloudinary) {
+		var resultCloudinary = await cloudinary.uploader.upload(pictureName);
+
+		console.log("This is a picture to Cloudinary :", resultCloudinary);
+
+		res.json({
+			result: true,
+			message: "🤩 File uploaded ! 🤩",
+			resultCloudinary,
+		});
+	} else {
+		res.json({
+			result: false,
+			error: "❌ File not uploaded ! ❌",
+			resultCloudinary,
+		});
+	}
+	fs.unlinkSync(pictureName);
 });
 
 module.exports = router;
