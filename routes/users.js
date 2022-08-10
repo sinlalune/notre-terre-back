@@ -42,7 +42,7 @@ router.get("/", function (req, res, next) {
 
 /* GET users listing. */
 router.get("/test", function (req, res, next) {
-  res.send("respond with a resource");
+	res.send("respond with a resource");
 });
 /* POST user to database. */
 router.post("/sign-up", async function (req, res, next) {
@@ -59,7 +59,7 @@ router.post("/sign-up", async function (req, res, next) {
 
 	if (searchUser != null) {
 		error.push(
-			"❌ Utilisateur déjà enregistré, veuillez saisir une autre adresse email ❌",
+			"❌ Utilisateur déjà enregistré, veuillez saisir une autre adresse email ❌"
 		);
 	}
 	if (
