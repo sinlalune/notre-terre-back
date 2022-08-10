@@ -1,3 +1,4 @@
+var fileUpload = require("express-fileupload");
 require("./models/connection");
 var createError = require("http-errors");
 var express = require("express");
@@ -12,6 +13,7 @@ var cardRouter = require("./routes/card");
 var researchRouter = require("./routes/research");
 
 var app = express();
+app.use(fileUpload());
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -41,6 +43,7 @@ app.use("/users", usersRouter);
 app.use("/create", createRouter);
 app.use("/card", cardRouter);
 app.use("/research", researchRouter);
+app.use("/upload-snap", researchRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
