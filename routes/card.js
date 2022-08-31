@@ -30,7 +30,7 @@ router.get("/product", async function (req, res, next) {
 
 router.get("/orders", async function (req, res, next) {
   const user_id = req.query.user_id;
-  console.log("The id of this product is: ", product_id);
+  console.log("The id of this product is: ", user_id);
   const user_orders = await userModel
     .findById(user_id)
     .populate("orders")
