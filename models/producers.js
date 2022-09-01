@@ -5,7 +5,7 @@ const producerSchema = mongoose.Schema({
   lastname: String,
   desc: String,
   pictures: [String],
-  badges: [{ type: mongoose.Schema.Types.ObjectId, ref: "product" }],
+  badges: [{ type: mongoose.Schema.Types.ObjectId, ref: "products" }],
   type_delivery: String,
 });
 

@@ -2,12 +2,14 @@ var mongoose = require("mongoose");
 
 const orderSchema = mongoose.Schema({
 	type: String,
-	product: { type: mongoose.Schema.Types.ObjectId, ref: "product" },
+	product: { type: mongoose.Schema.Types.ObjectId, ref: "products" },
 	quantity: Number,
 	amount: Number,
 	current_state: String,
 	type_delivery: String,
 });
+
+var orderModel =mongoose.model('orderModel',orderSchema)
 
 const addressSchema = mongoose.Schema({
 	street: String,
@@ -29,4 +31,4 @@ const userSchema = mongoose.Schema({
 
 const userModel = mongoose.model("users", userSchema);
 
-module.exports = userModel;
+module.exports = userModel

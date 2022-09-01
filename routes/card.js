@@ -3,6 +3,8 @@ var router = express.Router();
 const productModel = require("../models/products");
 
 const producerModel = require("../models/producers");
+const userModel = require("../models/users");
+const orderModel = require("../models/users");
 
 router.get("/productlist", async function (req, res, next) {
   const product = await productModel.find();
@@ -30,11 +32,14 @@ router.get("/product", async function (req, res, next) {
 
 router.get("/orders", async function (req, res, next) {
   const user_id = req.query.user_id;
-  console.log("The id of this product is: ", user_id);
+  console.log("The id of this user is: ", user_id);
   const user_orders = await userModel
     .findById(user_id)
     .populate("orders")
-  res.json({ user_orders });
+    .populate("orders.product")
+
+
+  res.json({ orders });
 
 });
 module.exports = router;
