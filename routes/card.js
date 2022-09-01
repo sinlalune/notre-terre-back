@@ -38,6 +38,9 @@ router.get("/orders", async function (req, res, next) {
     .populate("orders")
     .populate("orders.product")
 
+  
+  console.log('orders',user_orders)
+  const orders = user_orders.orders
 
   res.json({ orders });
 
